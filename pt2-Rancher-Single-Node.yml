@@ -1,0 +1,25 @@
+
+# VM Rancher Server
+gcloud beta compute ssh --zone "us-central1-a" "rancher-server"  --project "lab-rancher-k8s-docker"
+
+################################
+# Domínio                      #
+################################
+italoedebora.com.br
+
+Subdominios:
+    rancher.italoedebora.com.br-------> record A --> <ip externo rancher-server-vm> 
+    *.rancher.italoedebora.com.br-----> record A --> <ips externos k8s1,2,3> 
+
+
+docker container run -d --name rancher --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 80:80 -p 443:443 rancher/rancher:v2.4.3
+docker container ps
+# CONTAINER ID        IMAGE                    COMMAND             CREATED             STATUS              PORTS                                      NAMES
+# f161dcef5ed7        rancher/rancher:v2.4.3   "entrypoint.sh"     13 seconds ago      Up 5 seconds        0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   rancher
+
+#Test
+rancher.italoedebora.com.br
+
+
+
+

@@ -1,0 +1,35 @@
+#Acesse:
+rancher.italoedebora.com.br
+
+#Criar Cluster
+
+#Gerar o Comando pra rodar container agent que instalará o K8S no NODE:
+
+# Node K8S-1:
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes \
+ -v /var/run:/var/run rancher/rancher-agent:v2.4.3 --server https://rancher.italoedebora.com.br \
+ --token 6ncw4l2d29swc5z7grlcfm7546s7mgf5nqbhrdnw75pnxqx5rdzz7n --ca-checksum 586d44b1aa2ee5fd66b09e1e04467e12dc324af7bef29ea8e2b950b56125de5a \
+ --node-name k8s-1 --etcd --controlplane --worker
+
+
+gcloud beta compute ssh --zone "us-central1-a" "k8s-1"  --project "lab-rancher-k8s-docker"
+
+
+ # Node K8S-2(Mudar apena --node-name):
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes \
+ -v /var/run:/var/run rancher/rancher-agent:v2.4.3 --server https://rancher.italoedebora.com.br \
+ --token 6ncw4l2d29swc5z7grlcfm7546s7mgf5nqbhrdnw75pnxqx5rdzz7n --ca-checksum 586d44b1aa2ee5fd66b09e1e04467e12dc324af7bef29ea8e2b950b56125de5a \
+ --node-name k8s-2 --etcd --controlplane --worker
+
+
+gcloud beta compute ssh --zone "us-central1-a" "k8s-2"  --project "lab-rancher-k8s-docker"
+
+
+
+ # Node K8S-3(Mudar apena --node-name):
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes \
+ -v /var/run:/var/run rancher/rancher-agent:v2.4.3 --server https://rancher.italoedebora.com.br \
+ --token 6ncw4l2d29swc5z7grlcfm7546s7mgf5nqbhrdnw75pnxqx5rdzz7n --ca-checksum 586d44b1aa2ee5fd66b09e1e04467e12dc324af7bef29ea8e2b950b56125de5a \
+ --node-name k8s-3 --etcd --controlplane --worker
+
+ gcloud beta compute ssh --zone "us-central1-a" "k8s-3"  --project "lab-rancher-k8s-docker"
